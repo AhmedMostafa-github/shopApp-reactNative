@@ -1,4 +1,10 @@
-import { LOGIN, SIGNUP, AUTHENTICATE, SET_DID_TRY_AL } from "../actions/auth";
+import {
+  LOGIN,
+  SIGNUP,
+  AUTHENTICATE,
+  SET_DID_TRY_AL,
+  LOGOUT,
+} from "../actions/auth";
 
 const initialState = {
   isLoggedin: false,
@@ -19,6 +25,12 @@ export default (state = initialState, action) => {
     case SET_DID_TRY_AL:
       return {
         ...state,
+        didTrytoAutoLogin: true,
+      };
+    case LOGOUT:
+      console.log("error mn hna");
+      return {
+        ...initialState,
         didTrytoAutoLogin: true,
       };
 

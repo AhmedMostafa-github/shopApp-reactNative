@@ -1,10 +1,13 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { createDrawerNavigator } from "@react-navigation/drawer";
-import { Platform } from "react-native";
+import {
+  createDrawerNavigator,
+  DrawerItemList,
+} from "@react-navigation/drawer";
+import { Platform, SafeAreaView, Button, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import ProductDeatilsScreen from "../screens/shop/ProductDeatilsScreen";
 import ProductsOverviewScreen from "../screens/shop/ProductsOverviewScreen";
@@ -15,6 +18,7 @@ import UserProdectScreen from "../screens/user/UserProdectScreen";
 import EditProductScreen from "../screens/user/EditProductScreen";
 import AuthScreen from "../screens/user/AuthScreen";
 import StartupScreen from "../screens/StartupScreen";
+import * as authActions from "../store/actions/auth";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -31,13 +35,6 @@ const defaultNavOptions = {
 const AuthStack = () => {
   return (
     <Stack.Navigator>
-      {/* <Stack.Screen
-        name="StartupScreen"
-        component={StartupScreen}
-        options={{
-          headerShown: false,
-        }}
-      /> */}
       <Stack.Screen
         name="AuthScreen"
         component={AuthScreen}
@@ -107,8 +104,25 @@ const AdminStack = () => (
 );
 
 const DrwaerNavigator = () => {
+  const dispatch = useDispatch();
   return (
     <Drawer.Navigator
+      drawerContent={(props) => {
+        return (
+          <View style={{ flex: 1, paddingTop: 20 }}>
+            <SafeAreaView forceInset={{ top: "always", horizontal: "never" }}>
+              <DrawerItemList {...props} />
+              <Button
+                title="logout"
+                color={Colors.primary}
+                onPress={() => {
+                  dispatch(authActions.logout());
+                }}
+              />
+            </SafeAreaView>
+          </View>
+        );
+      }}
       drawerContentOptions={{
         activeTintColor: Colors.primary,
       }}

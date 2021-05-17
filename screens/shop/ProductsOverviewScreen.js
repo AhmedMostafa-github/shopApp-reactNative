@@ -13,6 +13,7 @@ import {
   ActivityIndicator,
   StyleSheet,
 } from "react-native";
+import { useFocusEffect } from "@react-navigation/native";
 import { useSelector, useDispatch } from "react-redux";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
@@ -40,13 +41,13 @@ const ProductsOverviewScreen = (props) => {
     setIsRefreshing(false);
   }, [dispatch, setIsLoading, setError]);
 
-  useEffect(() => {
-    const willFocusSub = props.navigation.addListener("focus", loadProducts);
+  useFocusEffect(
+    useCallback(() => {
+      const unsubscribe = props.navigation.addListener("focus", loadProducts);
 
-    return () => {
-      willFocusSub.remove();
-    };
-  }, [loadProducts]);
+      return unsubscribe();
+    }, [loadProducts])
+  );
 
   useEffect(() => {
     setIsLoading(true);
