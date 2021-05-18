@@ -24,7 +24,7 @@ const StartupScreen = (props) => {
         dispatch(authActions.setDidTryAL());
         return;
       }
-      const expirationTime = expiryDate.getTime() - new Date().getTime();
+      const expirationTime = expirationDate.getTime() - new Date().getTime();
 
       dispatch(authActions.authenticate(userId, token, expirationTime));
     };

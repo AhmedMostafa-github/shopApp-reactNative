@@ -28,7 +28,6 @@ export default (state = initialState, action) => {
         didTrytoAutoLogin: true,
       };
     case LOGOUT:
-      console.log("error mn hna");
       return {
         ...initialState,
         didTrytoAutoLogin: true,
