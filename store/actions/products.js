@@ -11,7 +11,7 @@ export const fetchProducts = () => {
     // any async code you want!
     try {
       const response = await fetch(
-        "https://shop-app-d53e5-default-rtdb.firebaseio.com/products.json"
+        "https://shop-app-282d8-default-rtdb.firebaseio.com/products.json"
       );
 
       if (!response.ok) {
@@ -50,7 +50,7 @@ export const deleteProduct = (productId) => {
   return async (dispatch, getState) => {
     const token = getState().auth.token;
     const response = await fetch(
-      `https://shop-app-d53e5-default-rtdb.firebaseio.com/products/${productId}.json?auth=${token}`,
+      `https://shop-app-282d8-default-rtdb.firebaseio.com/products/${productId}.json?auth=${token}`,
       {
         method: "DELETE",
       }
@@ -69,7 +69,7 @@ export const createProduct = (title, description, imageUrl, price) => {
     const userId = getState().auth.userId;
     // any async code you want!
     const response = await fetch(
-      `https://shop-app-d53e5-default-rtdb.firebaseio.com/products.json?auth=${token}`,
+      `https://shop-app-282d8-default-rtdb.firebaseio.com/products.json?auth=${token}`,
       {
         method: "POST",
         headers: {
@@ -105,7 +105,7 @@ export const updateProduct = (id, title, description, imageUrl, price) => {
   return async (dispatch, getState) => {
     const token = getState().auth.token;
     const response = await fetch(
-      `https://shop-app-d53e5-default-rtdb.firebaseio.com/products/${id}.json?auth=${token}`,
+      `https://shop-app-282d8-default-rtdb.firebaseio.com/products/${id}.json?auth=${token}`,
       {
         method: "PATCH",
         headers: {
